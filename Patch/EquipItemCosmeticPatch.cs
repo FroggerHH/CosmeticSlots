@@ -60,8 +60,5 @@ internal class EquipItemCosmeticPatch
         __instance.SetupEquipment();
         if (triggerEquipEffects)
             __instance.TriggerEquipEffect(item);
-
-        StackTrace st = new();
-        Debug(st);
     }
 }
