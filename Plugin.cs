@@ -13,7 +13,7 @@ internal class Plugin : BaseUnityPlugin
 {
     #region values
 
-    internal const string ModName = "CosmeticSlots", ModVersion = "1.0.0", ModGUID = "com.Frogger." + ModName;
+    internal const string ModName = "CosmeticSlots", ModVersion = "1.0.1", ModGUID = "com.Frogger." + ModName;
     internal static Harmony harmony = new(ModGUID);
 
     internal static Plugin _self;

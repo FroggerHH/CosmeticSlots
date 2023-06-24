@@ -27,5 +27,7 @@ internal class DisplayCosmeticsPatch
 
         visEq.SetChestItem(chestName);
         visEq.SetHelmetItem(helmetName);
+        
+        if(SceneManager.GetActiveScene().name == )
     }
 }

@@ -10,15 +10,18 @@ namespace CosmeticSlots;
 [HarmonyPatch]
 internal class SetCosmeticItemsTypePatch
 {
-    [HarmonyPatch(typeof(ZNetScene), nameof(ZNetScene.Awake)), HarmonyPostfix]
+    [HarmonyPatch(typeof(ZNetScene), nameof(ZNetScene.Awake)), HarmonyPostfix, HarmonyWrapSafe]
     public static void Postfix(ZNetScene __instance)
     {
-        var hildir = __instance.GetPrefab("Hildir").GetComponent<Trader>();
-        var itemDrops = hildir.m_items;
+        var hildirObj = __instance.GetPrefab("Hildir");
+        if (!hildirObj) return;
+        if (!hildirObj.TryGetComponent(out Trader trader)) return;
+        var itemDrops = trader.m_items;
 
         foreach (var drop in itemDrops)
         {
-            var sharedData = drop.m_prefab.m_itemData.m_shared;
+            var sharedData = drop?.m_prefab?.m_itemData?.m_shared;
+            if (sharedData == null) continue;
 
             if (sharedData.m_itemType == Chest)
             {
