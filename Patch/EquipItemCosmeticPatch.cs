@@ -1,19 +1,13 @@
-﻿using System.Diagnostics;
-using HarmonyLib;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using static CosmeticSlots.Plugin;
-using static ItemDrop;
+﻿using HarmonyLib;
 using static ItemDrop.ItemData;
 using static ItemDrop.ItemData.ItemType;
-
 
 namespace CosmeticSlots;
 
 [HarmonyPatch]
 internal class EquipItemCosmeticPatch
 {
-    [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.EquipItem)), HarmonyPostfix]
+    [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.EquipItem)), HarmonyPostfix, HarmonyWrapSafe]
     public static void PatchEquip(Humanoid __instance, ItemDrop.ItemData item, bool triggerEquipEffects,
         ref bool __result)
     {

@@ -83,40 +83,23 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="MaterialReplacer.cs" />
         <Compile Include="Patch\EquipItemCosmeticPatch.cs" />
         <Compile Include="Patch\DisplayCosmeticsPatch.cs" />
         <Compile Include="Patch\IsItemEquipedPatch.cs" />
         <Compile Include="Patch\ItemStandCosmeticsPatch.cs" />
         <Compile Include="Patch\SetCosmeticItemsTypePatch.cs" />
-        <Compile Include="PieceManager.cs" />
         <Compile Include="PlayerExtension.cs" />
-        <Compile Include="Plugin.cs" />
+        <Compile Include="CosmeticSlotsPlugin.cs" />
         <Compile Include="ConfigurationManagerAttributes.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="assets\" />
-      <Folder Include="Build\" />
-    </ItemGroup>
-    <ItemGroup>
       <None Include="App.config" />
-      <None Include="packages.config" />
-    </ItemGroup>
-    <ItemGroup>
-      <Content Include="ILRepack.targets" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-    <Target Name="CopyDLL" AfterTargets="ILRepack">
+    <Target Name="CopyDLL" AfterTargets="Build">
         <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="D:\Slava\Coding\$(ProjectName)\Build" />
         <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="D:\Steam\steamapps\common\Valheim\BepInEx\plugins" />
-    </Target>
-    <Import Project="packages\ILRepack.Lib.MSBuild.Task.2.0.18.2\build\ILRepack.Lib.MSBuild.Task.targets" Condition="Exists('packages\ILRepack.Lib.MSBuild.Task.2.0.18.2\build\ILRepack.Lib.MSBuild.Task.targets')" />
-    <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-      <PropertyGroup>
-        <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
-      </PropertyGroup>
-      <Error Condition="!Exists('packages\ILRepack.Lib.MSBuild.Task.2.0.18.2\build\ILRepack.Lib.MSBuild.Task.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ILRepack.Lib.MSBuild.Task.2.0.18.2\build\ILRepack.Lib.MSBuild.Task.targets'))" />
     </Target>
 
 </Project>

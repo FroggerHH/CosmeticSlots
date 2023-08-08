@@ -1,18 +1,12 @@
 ﻿using HarmonyLib;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using static ItemDrop;
-using static ItemDrop.ItemData;
-using static ItemDrop.ItemData.ItemType;
-
 
 namespace CosmeticSlots;
 
 [HarmonyPatch]
 internal class DisplayCosmeticsPatch
 {
-    [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.SetupVisEquipment)), HarmonyPostfix]
-    public static void Patch(Humanoid __instance, VisEquipment visEq, bool isRagdoll)
+    [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.SetupVisEquipment)), HarmonyPostfix, HarmonyWrapSafe]
+    public static void CosmeticSlots_DisplayCosmeticsPatch(Humanoid __instance, VisEquipment visEq, bool isRagdoll)
     {
         if (__instance is not Player { } player) return;
         var chestCosmeticItem = player.GetAdditionalData().m_chestCosmeticItem;
@@ -27,7 +21,5 @@ internal class DisplayCosmeticsPatch
 
         visEq.SetChestItem(chestName);
         visEq.SetHelmetItem(helmetName);
-        
-        if(SceneManager.GetActiveScene().name == )
     }
 }
