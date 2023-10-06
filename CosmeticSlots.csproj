@@ -50,6 +50,9 @@
         <Reference Include="BepInEx">
             <HintPath>..\..\..\Steam\steamapps\common\Valheim\BepInEx\core\BepInEx.dll</HintPath>
         </Reference>
+        <Reference Include="kg.Marketplace">
+            <HintPath>..\Utils\kg.Marketplace.dll</HintPath>
+        </Reference>
         <Reference Include="ServerSync">
             <HintPath>..\Utils\ServerSync.dll</HintPath>
         </Reference>
@@ -78,15 +81,20 @@
         <Reference Include="UnityEngine.ParticleSystemModule">
             <HintPath>..\..\Unity\Unity Hub\versions\2020.3.36f1\Editor\Data\Managed\UnityEngine\UnityEngine.ParticleSystemModule.dll</HintPath>
         </Reference>
+        <Reference Include="UnityEngine.PhysicsModule">
+            <HintPath>..\..\..\Steam\steamapps\common\Valheim\valheim_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+        </Reference>
         <Reference Include="UnityEngine.UI">
             <HintPath>..\..\..\Steam\steamapps\common\Valheim\valheim_Data\Managed\UnityEngine.UI.dll</HintPath>
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Extensions\StringExtension.cs"/>
         <Compile Include="Patch\EquipItemCosmeticPatch.cs"/>
         <Compile Include="Patch\DisplayCosmeticsPatch.cs"/>
         <Compile Include="Patch\IsItemEquipedPatch.cs"/>
         <Compile Include="Patch\ItemStandCosmeticsPatch.cs"/>
+        <Compile Include="Patch\DisplayMarketPlace.cs"/>
         <Compile Include="Patch\SetCosmeticItemsTypePatch.cs"/>
         <Compile Include="HumanoidExtension.cs"/>
         <Compile Include="Plugin.cs"/>
@@ -98,7 +106,7 @@
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <Target Name="CopyDLL" AfterTargets="Build">
-        <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="D:\Slava\Coding\_Publish\$(ProjectName)" />
+        <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="D:\Slava\Coding\_Publish\Frogger-$(ProjectName)" />
         <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="D:\Steam\steamapps\common\Valheim\BepInEx\plugins" />
     </Target>
 
