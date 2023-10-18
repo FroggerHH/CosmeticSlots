@@ -1,6 +1,5 @@
 ﻿using HarmonyLib;
 using static CosmeticSlots.Plugin;
-using static ItemDrop.ItemData.ItemType;
 
 namespace CosmeticSlots;
 
@@ -11,20 +10,25 @@ internal class EquipItemCosmeticPatch
     public static void PatchEquip(Humanoid __instance, ItemDrop.ItemData item, bool triggerEquipEffects,
         ref bool __result)
     {
-        // if (__instance is not Player { } player) return;
-
-        if ((item.m_shared.m_itemType == Chest && __instance.GetAdditionalData().m_chestCosmeticItem == null) ||
+        var data = __instance.GetAdditionalData();
+        if ((item.m_shared.m_itemType == Chest && data.chestCosmeticItem == null) ||
             item.m_shared.m_itemType == COSMETIC_CHEST)
-            __instance.UnequipItem(__instance.GetAdditionalData().m_chestCosmeticItem, triggerEquipEffects);
+            __instance.UnequipItem(data.chestCosmeticItem, triggerEquipEffects);
 
-        if ((item.m_shared.m_itemType == Helmet && __instance.GetAdditionalData().m_helmetCosmeticItem == null) ||
+        if ((item.m_shared.m_itemType == Helmet && data.helmetCosmeticItem == null) ||
             item.m_shared.m_itemType == COSMETIC_HELMET)
-            __instance.UnequipItem(__instance.GetAdditionalData().m_helmetCosmeticItem, triggerEquipEffects);
+            __instance.UnequipItem(data.helmetCosmeticItem, triggerEquipEffects);
+
+        if ((item.m_shared.m_itemType == Legs && data.legsCosmeticItem == null) ||
+            item.m_shared.m_itemType == COSMETIC_LEGS)
+            __instance.UnequipItem(data.legsCosmeticItem, triggerEquipEffects);
 
         if (item.m_shared.m_itemType == COSMETIC_CHEST)
-            __instance.GetAdditionalData().m_chestCosmeticItem = item;
+            data.chestCosmeticItem = item;
         else if (item.m_shared.m_itemType == COSMETIC_HELMET)
-            __instance.GetAdditionalData().m_helmetCosmeticItem = item;
+            data.helmetCosmeticItem = item;
+        else if (item.m_shared.m_itemType == COSMETIC_LEGS)
+            data.legsCosmeticItem = item;
 
         if (__instance.IsItemEquiped(item))
         {
@@ -33,8 +37,7 @@ internal class EquipItemCosmeticPatch
         }
 
         __instance.SetupEquipment();
-        if (triggerEquipEffects)
-            __instance.TriggerEquipEffect(item);
+        if (triggerEquipEffects) __instance.TriggerEquipEffect(item);
     }
 
     [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.UnequipItem))] [HarmonyPostfix]
@@ -42,13 +45,14 @@ internal class EquipItemCosmeticPatch
     {
         if (!__instance || item == null) return;
 
-        if (__instance.GetAdditionalData().m_chestCosmeticItem == item)
-            __instance.GetAdditionalData().m_chestCosmeticItem = null;
-        else if (__instance.GetAdditionalData().m_helmetCosmeticItem == item)
-            __instance.GetAdditionalData().m_helmetCosmeticItem = null;
+        if (__instance.GetAdditionalData().chestCosmeticItem == item)
+            __instance.GetAdditionalData().chestCosmeticItem = null;
+        else if (__instance.GetAdditionalData().helmetCosmeticItem == item)
+            __instance.GetAdditionalData().helmetCosmeticItem = null;
+        else if (__instance.GetAdditionalData().legsCosmeticItem == item)
+            __instance.GetAdditionalData().legsCosmeticItem = null;
 
         __instance.SetupEquipment();
-        if (triggerEquipEffects)
-            __instance.TriggerEquipEffect(item);
+        if (triggerEquipEffects) __instance.TriggerEquipEffect(item);
     }
 }

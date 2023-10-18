@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using UnityEngine.Serialization;
 
 namespace CosmeticSlots;
 
 [Serializable]
 public class HumanoidAdditionalData
 {
-    public ItemDrop.ItemData m_chestCosmeticItem, m_helmetCosmeticItem;
+    public ItemDrop.ItemData chestCosmeticItem;
+    public ItemDrop.ItemData helmetCosmeticItem;
+    public ItemDrop.ItemData legsCosmeticItem;
 
     public HumanoidAdditionalData()
     {
-        m_chestCosmeticItem = null;
-        m_helmetCosmeticItem = null;
+        chestCosmeticItem = null;
+        helmetCosmeticItem = null;
+        legsCosmeticItem = null;
     }
 }
 

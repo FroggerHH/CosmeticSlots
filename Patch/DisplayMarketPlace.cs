@@ -9,27 +9,36 @@ namespace CosmeticSlots;
 [HarmonyPatch]
 internal class DisplayMarketPlace
 {
-    private static readonly int ChestTex = Shader.PropertyToID("_ChestTex");
-    private static readonly int ChestBumpMap = Shader.PropertyToID("_ChestBumpMap");
-    private static readonly int ChestMetal = Shader.PropertyToID("_ChestMetal");
-
     [HarmonyPatch(typeof(NPCcomponent), nameof(NPCcomponent.EquipItemsOnModel), typeof(SkinnedMeshRenderer),
-        typeof(string), typeof(CapsuleCollider[]))] [HarmonyPostfix] [HarmonyWrapSafe]
-    public static void CosmeticSlots_DisplayCosmeticsPatch(NPCcomponent __instance, SkinnedMeshRenderer joint,
-        string prefab, CapsuleCollider[] capsule)
+         typeof(string), typeof(CapsuleCollider[])), HarmonyWrapSafe]
+    public static class MarketplacePatch
     {
-        if (!prefab.IsGood()) return;
-        var itemDrop = ObjectDB.instance.GetItemPrefab(prefab)?.GetComponent<ItemDrop>();
-        if (itemDrop == null) return;
-        var armorMaterial = itemDrop.m_itemData.m_shared.m_armorMaterial;
-        var itemType = itemDrop.m_itemData.m_shared.m_itemType;
+        private static ItemType? itemType = null;
 
-        if (itemType == COSMETIC_CHEST && armorMaterial)
+        [HarmonyPrefix]
+        public static void Prefix(NPCcomponent __instance, string prefab)
         {
-            joint.material.SetTexture(ChestTex, armorMaterial.GetTexture(ChestTex));
-            joint.material.SetTexture(ChestBumpMap, armorMaterial.GetTexture(ChestBumpMap));
-            joint.material.SetTexture(ChestMetal, armorMaterial.GetTexture(ChestMetal));
+            if (!prefab.IsGood()) return;
+            var itemDrop = ObjectDB.instance.GetItemPrefab(prefab)?.GetComponent<ItemDrop>();
+            if (itemDrop == null) return;
+
+            itemType = itemDrop.m_itemData.m_shared.m_itemType;
+            itemDrop.m_itemData.m_shared.m_itemType = itemDrop.m_itemData.m_shared.m_itemType switch
+            {
+                COSMETIC_CHEST => ItemType.Chest,
+                COSMETIC_HELMET => ItemType.Helmet,
+                COSMETIC_LEGS => ItemType.Legs
+            };
         }
-        __instance.AttachArmor(prefab.GetStableHashCode(), joint, capsule);
+
+        [HarmonyPostfix]
+        public static void Postfix(NPCcomponent __instance, string prefab)
+        {
+            if (itemType == null || !prefab.IsGood()) return;
+            var itemDrop = ObjectDB.instance.GetItemPrefab(prefab)?.GetComponent<ItemDrop>();
+            if (itemDrop == null) return;
+            itemDrop.m_itemData.m_shared.m_itemType = itemType.Value;
+            itemType = null;
+        }
     }
 }

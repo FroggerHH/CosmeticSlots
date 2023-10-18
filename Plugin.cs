@@ -12,10 +12,11 @@ internal class Plugin : BaseUnityPlugin
     public const string ModName = "Frogger.CosmeticSlots", ModVersion = "1.3.0", ModGUID = "com." + ModName;
     public const ItemDrop.ItemData.ItemType COSMETIC_CHEST = (ItemDrop.ItemData.ItemType)30;
     public const ItemDrop.ItemData.ItemType COSMETIC_HELMET = (ItemDrop.ItemData.ItemType)31;
+    public const ItemDrop.ItemData.ItemType COSMETIC_LEGS = (ItemDrop.ItemData.ItemType)32;
     internal static Harmony harmony;
     public static Plugin _self;
 
-    private void Awake() 
+    private void Awake()
     {
         _self = this;
         harmony = new Harmony(ModGUID);
