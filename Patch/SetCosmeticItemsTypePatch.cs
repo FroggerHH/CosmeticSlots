@@ -11,17 +11,18 @@ namespace CosmeticSlots;
 [HarmonyPatch]
 internal class SetCosmeticItemsTypePatch
 {
+    static ItemDrop? getItem(string name) => ObjectDB.instance?.GetItemPrefab(name)?.GetComponent<ItemDrop>();
+
+    public static void setType(string name, ItemType type)
+    {
+        var item = getItem(name);
+        if (!item) return;
+        item.m_itemData.m_shared.m_itemType = type;
+    }
+
     [HarmonyPatch(typeof(ZNetScene), nameof(ZNetScene.Awake))] [HarmonyPostfix] [HarmonyWrapSafe]
     public static void Postfix(ZNetScene __instance)
     {
-        ItemDrop? getItem(string name) => ObjectDB.instance?.GetItemPrefab(name).GetComponent<ItemDrop>();
-        void setType(string name, ItemType type)
-        {
-            var item = getItem(name);
-            if(!item) return;
-            item.m_itemData.m_shared.m_itemType = type;
-        }
-
         foreach (var trade in __instance.GetPrefab("Hildir").GetComponent<Trader>().m_items)
         {
             var sharedData = trade?.m_prefab?.m_itemData?.m_shared;
@@ -32,6 +33,7 @@ internal class SetCosmeticItemsTypePatch
         }
 
         setType("HelmetDverger", COSMETIC_HELMET);
+        setType("HelmetPointyHat", COSMETIC_HELMET);
 
         if (Chainloader.PluginInfos.ContainsKey("MagicMike.Weedheim"))
         {
@@ -39,18 +41,20 @@ internal class SetCosmeticItemsTypePatch
             setType("Rasta_Pants_02", COSMETIC_LEGS);
             setType("Rasta_Pants_03", COSMETIC_LEGS);
             setType("Rasta_Pants_04", COSMETIC_LEGS);
-            
+
             setType("Rasta_Top_01", COSMETIC_CHEST);
             setType("Rasta_Top_02", COSMETIC_CHEST);
             setType("Rasta_Top_03", COSMETIC_CHEST);
             setType("Rasta_Top_04", COSMETIC_CHEST);
-            
+
             setType("hat_01", COSMETIC_HELMET);
             setType("hat_02", COSMETIC_HELMET);
             setType("hat_03", COSMETIC_HELMET);
             setType("hat_04", COSMETIC_HELMET);
             setType("hat_05", COSMETIC_HELMET);
             setType("hat_06", COSMETIC_HELMET);
+
+            setType("CapeHemp", COSMETIC_CAPE);
         }
     }
 }

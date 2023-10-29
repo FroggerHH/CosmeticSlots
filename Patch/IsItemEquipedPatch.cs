@@ -13,7 +13,8 @@ class IsItemEquipedPatch
         __result = __result ||
                    data.helmetCosmeticItem == item ||
                    data.chestCosmeticItem == item ||
-                   data.legsCosmeticItem == item;
+                   data.legsCosmeticItem == item ||
+                   data.capeCosmeticItem == item;
     }
 
     [HarmonyPatch(typeof(ItemDrop.ItemData), nameof(ItemDrop.ItemData.IsEquipable))] [HarmonyPostfix]
@@ -23,6 +24,7 @@ class IsItemEquipedPatch
         __result = __result ||
                    itemType == COSMETIC_CHEST ||
                    itemType == COSMETIC_HELMET ||
-                   itemType == COSMETIC_LEGS;
+                   itemType == COSMETIC_LEGS ||
+                   itemType == COSMETIC_CAPE;
     }
 }

@@ -27,7 +27,8 @@ internal class DisplayMarketPlace
             {
                 COSMETIC_CHEST => ItemType.Chest,
                 COSMETIC_HELMET => ItemType.Helmet,
-                COSMETIC_LEGS => ItemType.Legs
+                COSMETIC_LEGS => ItemType.Legs,
+                COSMETIC_CAPE => ItemType.Shoulder,
             };
         }
 

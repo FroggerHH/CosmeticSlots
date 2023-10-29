@@ -23,12 +23,18 @@ internal class EquipItemCosmeticPatch
             item.m_shared.m_itemType == COSMETIC_LEGS)
             __instance.UnequipItem(data.legsCosmeticItem, triggerEquipEffects);
 
+        if ((item.m_shared.m_itemType == Shoulder && data.capeCosmeticItem == null) ||
+            item.m_shared.m_itemType == COSMETIC_CAPE)
+            __instance.UnequipItem(data.capeCosmeticItem, triggerEquipEffects);
+
         if (item.m_shared.m_itemType == COSMETIC_CHEST)
             data.chestCosmeticItem = item;
         else if (item.m_shared.m_itemType == COSMETIC_HELMET)
             data.helmetCosmeticItem = item;
         else if (item.m_shared.m_itemType == COSMETIC_LEGS)
             data.legsCosmeticItem = item;
+        else if (item.m_shared.m_itemType == COSMETIC_CAPE)
+            data.capeCosmeticItem = item;
 
         if (__instance.IsItemEquiped(item))
         {
@@ -51,6 +57,8 @@ internal class EquipItemCosmeticPatch
             __instance.GetAdditionalData().helmetCosmeticItem = null;
         else if (__instance.GetAdditionalData().legsCosmeticItem == item)
             __instance.GetAdditionalData().legsCosmeticItem = null;
+        else if (__instance.GetAdditionalData().capeCosmeticItem == item)
+            __instance.GetAdditionalData().capeCosmeticItem = null;
 
         __instance.SetupEquipment();
         if (triggerEquipEffects) __instance.TriggerEquipEffect(item);

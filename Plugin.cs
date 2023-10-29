@@ -13,6 +13,7 @@ internal class Plugin : BaseUnityPlugin
     public const ItemDrop.ItemData.ItemType COSMETIC_CHEST = (ItemDrop.ItemData.ItemType)30;
     public const ItemDrop.ItemData.ItemType COSMETIC_HELMET = (ItemDrop.ItemData.ItemType)31;
     public const ItemDrop.ItemData.ItemType COSMETIC_LEGS = (ItemDrop.ItemData.ItemType)32;
+    public const ItemDrop.ItemData.ItemType COSMETIC_CAPE = (ItemDrop.ItemData.ItemType)33;
     internal static Harmony harmony;
     public static Plugin _self;
 

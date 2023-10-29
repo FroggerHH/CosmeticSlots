@@ -10,12 +10,14 @@ public class HumanoidAdditionalData
     public ItemDrop.ItemData chestCosmeticItem;
     public ItemDrop.ItemData helmetCosmeticItem;
     public ItemDrop.ItemData legsCosmeticItem;
+    public ItemDrop.ItemData capeCosmeticItem;
 
     public HumanoidAdditionalData()
     {
         chestCosmeticItem = null;
         helmetCosmeticItem = null;
         legsCosmeticItem = null;
+        capeCosmeticItem = null;
     }
 }
 
