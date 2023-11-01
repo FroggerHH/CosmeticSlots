@@ -1,22 +1,24 @@
-﻿using BepInEx.Bootstrap;
+﻿#nullable enable
+using BepInEx.Bootstrap;
 using HarmonyLib;
-using JetBrains.Annotations;
-using static ItemDrop.ItemData;
-using static ItemDrop.ItemData.ItemType;
-using static UnityEngine.Object;
 using static CosmeticSlots.Plugin;
+
+// ReSharper disable Unity.NoNullPropagation
 
 namespace CosmeticSlots;
 
 [HarmonyPatch]
 internal class SetCosmeticItemsTypePatch
 {
-    static ItemDrop? getItem(string name) => ObjectDB.instance?.GetItemPrefab(name)?.GetComponent<ItemDrop>();
+    private static ItemDrop? getItem(string name)
+    {
+        return ObjectDB.instance?.GetItemPrefab(name)?.GetComponent<ItemDrop>();
+    }
 
     public static void setType(string name, ItemType type)
     {
         var item = getItem(name);
-        if (!item) return;
+        if (item == null) return;
         item.m_itemData.m_shared.m_itemType = type;
     }
 
@@ -34,6 +36,7 @@ internal class SetCosmeticItemsTypePatch
 
         setType("HelmetDverger", COSMETIC_HELMET);
         setType("HelmetPointyHat", COSMETIC_HELMET);
+        setType("CapeLinen", COSMETIC_CAPE);
 
         if (Chainloader.PluginInfos.ContainsKey("MagicMike.Weedheim"))
         {

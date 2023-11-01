@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Bootstrap;
+using CosmeticSlots.Patch;
 using HarmonyLib;
 using UnityEngine;
 
@@ -9,11 +10,11 @@ namespace CosmeticSlots;
 [BepInDependency("MarketplaceAndServerNPCs", BepInDependency.DependencyFlags.SoftDependency)]
 internal class Plugin : BaseUnityPlugin
 {
-    public const string ModName = "Frogger.CosmeticSlots", ModVersion = "1.4.0", ModGUID = "com." + ModName;
-    public const ItemDrop.ItemData.ItemType COSMETIC_CHEST = (ItemDrop.ItemData.ItemType)30;
-    public const ItemDrop.ItemData.ItemType COSMETIC_HELMET = (ItemDrop.ItemData.ItemType)31;
-    public const ItemDrop.ItemData.ItemType COSMETIC_LEGS = (ItemDrop.ItemData.ItemType)32;
-    public const ItemDrop.ItemData.ItemType COSMETIC_CAPE = (ItemDrop.ItemData.ItemType)33;
+    public const string ModName = "Frogger.CosmeticSlots", ModVersion = "1.5.0", ModGUID = "com." + ModName;
+    public const ItemType COSMETIC_CHEST = (ItemType)30;
+    public const ItemType COSMETIC_HELMET = (ItemType)31;
+    public const ItemType COSMETIC_LEGS = (ItemType)32;
+    public const ItemType COSMETIC_CAPE = (ItemType)33;
     internal static Harmony harmony;
     public static Plugin _self;
 

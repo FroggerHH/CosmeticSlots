@@ -3,8 +3,7 @@ using static CosmeticSlots.Plugin;
 
 namespace CosmeticSlots;
 
-[HarmonyPatch]
-class IsItemEquipedPatch
+[HarmonyPatch] internal class IsItemEquipedPatch
 {
     [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.IsItemEquiped))] [HarmonyPostfix] [HarmonyWrapSafe]
     public static void HumanoidIsItemEquiped(Humanoid __instance, ItemDrop.ItemData item, ref bool __result)

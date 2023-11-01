@@ -3,17 +3,18 @@ using HarmonyLib;
 using UnityEngine;
 using static Marketplace.Modules.NPC.Market_NPC;
 using static CosmeticSlots.Plugin;
+#pragma warning disable CS8509
 
-namespace CosmeticSlots;
+namespace CosmeticSlots.Patch;
 
 [HarmonyPatch]
 internal class DisplayMarketPlace
 {
     [HarmonyPatch(typeof(NPCcomponent), nameof(NPCcomponent.EquipItemsOnModel), typeof(SkinnedMeshRenderer),
-         typeof(string), typeof(CapsuleCollider[])), HarmonyWrapSafe]
+        typeof(string), typeof(CapsuleCollider[]))] [HarmonyWrapSafe]
     public static class MarketplacePatch
     {
-        private static ItemType? itemType = null;
+        private static ItemType? itemType;
 
         [HarmonyPrefix]
         public static void Prefix(NPCcomponent __instance, string prefab)
@@ -25,10 +26,10 @@ internal class DisplayMarketPlace
             itemType = itemDrop.m_itemData.m_shared.m_itemType;
             itemDrop.m_itemData.m_shared.m_itemType = itemDrop.m_itemData.m_shared.m_itemType switch
             {
-                COSMETIC_CHEST => ItemType.Chest,
-                COSMETIC_HELMET => ItemType.Helmet,
-                COSMETIC_LEGS => ItemType.Legs,
-                COSMETIC_CAPE => ItemType.Shoulder,
+                COSMETIC_CHEST => Chest,
+                COSMETIC_HELMET => Helmet,
+                COSMETIC_LEGS => Legs,
+                COSMETIC_CAPE => Shoulder
             };
         }
 
