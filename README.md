@@ -18,6 +18,12 @@ You can wear some clothes over your armor (armor is not shown) <br>
 - HelmetDverger
 - All staff exept capes from Weedheim
 
+### Configuration
+- The list of items in format: (itemPrefabName, ItemType)
+
+### Installation
+Required both on the server side and client side.
+
 ### <ins>If something does not work for you, you have found any bugs, there are any suggestions, then be sure to write to me!</ins>
 
 ### Contact
