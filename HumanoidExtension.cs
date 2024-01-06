@@ -1,15 +1,14 @@
-﻿using System;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 namespace CosmeticSlots;
 
 [Serializable]
 public class HumanoidAdditionalData
 {
-    public ItemDrop.ItemData chestCosmeticItem;
-    public ItemDrop.ItemData helmetCosmeticItem;
-    public ItemDrop.ItemData legsCosmeticItem;
-    public ItemDrop.ItemData capeCosmeticItem;
+    public ItemData chestCosmeticItem;
+    public ItemData helmetCosmeticItem;
+    public ItemData legsCosmeticItem;
+    public ItemData capeCosmeticItem;
 
     public HumanoidAdditionalData()
     {

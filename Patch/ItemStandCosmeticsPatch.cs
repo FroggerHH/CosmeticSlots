@@ -1,7 +1,4 @@
-﻿using HarmonyLib;
-using static CosmeticSlots.Plugin;
-
-namespace CosmeticSlots;
+﻿namespace CosmeticSlots.Patch;
 
 [HarmonyPatch]
 internal class ItemStandCosmeticsPatch

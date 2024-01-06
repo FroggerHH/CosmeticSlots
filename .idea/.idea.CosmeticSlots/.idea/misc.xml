@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="WindowStateProjectService">
-    <state x="552" y="186" key="Rider.ProjectTemplateDialog.Size" timestamp="1685377434546">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="186" key="Rider.ProjectTemplateDialog.Size/0.0.1920.1040" timestamp="1685377434546" />
+  <component name="Black">
+    <option name="sdkName" value="Python 3.11" />
   </component>
 </project>

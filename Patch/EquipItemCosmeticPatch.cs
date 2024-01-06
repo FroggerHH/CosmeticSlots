@@ -1,13 +1,10 @@
-﻿using HarmonyLib;
-using static CosmeticSlots.Plugin;
-
-namespace CosmeticSlots;
+﻿namespace CosmeticSlots.Patch;
 
 [HarmonyPatch]
 internal class EquipItemCosmeticPatch
 {
     [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.EquipItem))] [HarmonyPostfix] [HarmonyWrapSafe]
-    public static void PatchEquip(Humanoid __instance, ItemDrop.ItemData item, bool triggerEquipEffects,
+    public static void PatchEquip(Humanoid __instance, ItemData item, bool triggerEquipEffects,
         ref bool __result)
     {
         var data = __instance.GetAdditionalData();
@@ -47,7 +44,7 @@ internal class EquipItemCosmeticPatch
     }
 
     [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.UnequipItem))] [HarmonyPostfix]
-    public static void PatchUnequipItem(Humanoid __instance, ItemDrop.ItemData item, bool triggerEquipEffects)
+    public static void PatchUnequipItem(Humanoid __instance, ItemData item, bool triggerEquipEffects)
     {
         if (!__instance || item == null) return;
 

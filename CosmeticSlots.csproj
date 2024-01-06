@@ -4,15 +4,14 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{46BDCABE-BEB1-491F-8631-310F5186A3DB}</ProjectGuid>
+        <ProjectGuid>{AE09A2AD-0D0C-4B4D-B5AE-0C528A2DD21D}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>CosmeticSlots</RootNamespace>
         <AssemblyName>CosmeticSlots</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <LangVersion>latest</LangVersion>
+        <LangVersion>11</LangVersion>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -41,6 +40,9 @@
         <Reference Include="assembly_guiutils">
             <HintPath>..\Utils\assembly_guiutils_publicized.dll</HintPath>
         </Reference>
+        <Reference Include="assembly_lux">
+            <HintPath>..\Utils\assembly_lux_publicized.dll</HintPath>
+        </Reference>
         <Reference Include="assembly_utils">
             <HintPath>..\Utils\assembly_utils_publicized.dll</HintPath>
         </Reference>
@@ -50,36 +52,28 @@
         <Reference Include="BepInEx">
             <HintPath>..\..\..\Steam\steamapps\common\Valheim\BepInEx\core\BepInEx.dll</HintPath>
         </Reference>
+        <Reference Include="JFUtils">
+            <HintPath>..\Utils\JFUtils.dll</HintPath>
+        </Reference>
         <Reference Include="kg.Marketplace">
             <HintPath>..\Utils\kg.Marketplace.dll</HintPath>
         </Reference>
-        <Reference Include="ServerSync">
-            <HintPath>..\Utils\ServerSync.dll</HintPath>
-        </Reference>
+        <Reference Include="Microsoft.CSharp"/>
         <Reference Include="System"/>
         <Reference Include="System.Core"/>
         <Reference Include="System.Data"/>
         <Reference Include="System.Xml"/>
+        <Reference Include="Unity.TextMeshPro">
+            <HintPath>..\..\..\Steam\steamapps\common\Valheim\valheim_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+        </Reference>
         <Reference Include="UnityEngine">
             <HintPath>..\..\Unity\Unity Hub\versions\2020.3.36f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
-        </Reference>
-        <Reference Include="UnityEngine.AnimationModule">
-            <HintPath>..\..\Unity\Unity Hub\versions\2020.3.36f1\Editor\Data\Managed\UnityEngine\UnityEngine.AnimationModule.dll</HintPath>
-        </Reference>
-        <Reference Include="UnityEngine.AssetBundleModule">
-            <HintPath>..\..\Unity\Unity Hub\versions\2020.3.36f1\Editor\Data\Managed\UnityEngine\UnityEngine.AssetBundleModule.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.CoreModule">
             <HintPath>..\..\Unity\Unity Hub\versions\2020.3.36f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
         </Reference>
-        <Reference Include="UnityEngine.IMGUIModule">
-            <HintPath>..\..\Unity\Unity Hub\versions\2020.3.36f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
-        </Reference>
         <Reference Include="UnityEngine.InputLegacyModule">
-            <HintPath>..\..\Unity\Unity Hub\versions\2020.3.36f1\Editor\Data\Managed\UnityEngine\UnityEngine.InputLegacyModule.dll</HintPath>
-        </Reference>
-        <Reference Include="UnityEngine.ParticleSystemModule">
-            <HintPath>..\..\Unity\Unity Hub\versions\2020.3.36f1\Editor\Data\Managed\UnityEngine\UnityEngine.ParticleSystemModule.dll</HintPath>
+            <HintPath>..\..\..\Steam\steamapps\common\Valheim\valheim_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.PhysicsModule">
             <HintPath>..\..\..\Steam\steamapps\common\Valheim\valheim_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
@@ -87,31 +81,41 @@
         <Reference Include="UnityEngine.UI">
             <HintPath>..\..\..\Steam\steamapps\common\Valheim\valheim_Data\Managed\UnityEngine.UI.dll</HintPath>
         </Reference>
+        <Reference Include="YamlDotNet, Version=13.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+            <HintPath>packages\YamlDotNet.13.7.1\lib\net47\YamlDotNet.dll</HintPath>
+        </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Extensions\StringExtension.cs"/>
-        <Compile Include="GlobalUsings.cs"/>
-        <Compile Include="Patch\EquipItemCosmeticPatch.cs"/>
-        <Compile Include="Patch\DisplayCosmeticsPatch.cs"/>
-        <Compile Include="Patch\IsItemEquipedPatch.cs"/>
-        <Compile Include="Patch\ItemStandCosmeticsPatch.cs"/>
-        <Compile Include="Patch\DisplayMarketPlace.cs"/>
-        <Compile Include="Patch\SetCosmeticItemsTypePatch.cs"/>
-        <Compile Include="HumanoidExtension.cs"/>
-        <Compile Include="Plugin.cs"/>
-        <Compile Include="ConfigurationManagerAttributes.cs"/>
+        <Compile Include="Compatibility\kgMarketplace\MarketplaceTerritorySystem.cs" />
+        <Compile Include="Compatibility\kgMarketplace\MarketplaceTerritorySystem_RAW.cs" />
+        <Compile Include="GlobalUsings.cs" />
+        <Compile Include="HumanoidExtension.cs" />
+        <Compile Include="Patch\DisplayCosmeticsPatch.cs" />
+        <Compile Include="Patch\EquipItemCosmeticPatch.cs" />
+        <Compile Include="Patch\IsItemEquipedPatch.cs" />
+        <Compile Include="Patch\ItemStandCosmeticsPatch.cs" />
+        <Compile Include="Patch\SetCosmeticItemsTypePatch.cs" />
+        <Compile Include="Plugin.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
-        <None Include="App.config"/>
-    </ItemGroup>
-    <ItemGroup>
+        <Content Include="ILRepack.targets"/>
         <Content Include="README.md"/>
     </ItemGroup>
+    <ItemGroup>
+        <None Include="App.config"/>
+        <None Include="packages.config"/>
+    </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
-    <Target Name="CopyDLL" AfterTargets="Build">
+    <Import Project="packages\ILRepack.Lib.MSBuild.Task.2.0.18.2\build\ILRepack.Lib.MSBuild.Task.targets" Condition="Exists('packages\ILRepack.Lib.MSBuild.Task.2.0.18.2\build\ILRepack.Lib.MSBuild.Task.targets')"/>
+    <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+        <PropertyGroup>
+            <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them. For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+        </PropertyGroup>
+        <Error Condition="!Exists('packages\ILRepack.Lib.MSBuild.Task.2.0.18.2\build\ILRepack.Lib.MSBuild.Task.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ILRepack.Lib.MSBuild.Task.2.0.18.2\build\ILRepack.Lib.MSBuild.Task.targets'))"/>
+    </Target>
+    <Target Name="CopyDLL" AfterTargets="ILRepack">
         <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="D:\Slava\Coding\_Publish\Frogger-$(ProjectName)"/>
         <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="D:\Steam\steamapps\common\Valheim\BepInEx\plugins"/>
     </Target>
-
 </Project>

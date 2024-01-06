@@ -1,6 +1,4 @@
-﻿using HarmonyLib;
-
-namespace CosmeticSlots;
+﻿namespace CosmeticSlots.Patch;
 
 [HarmonyPatch]
 internal class DisplayCosmeticsPatch
