@@ -2,7 +2,7 @@
 
 # CosmeticSlots<br>
 
-![Version Badge](https://img.shields.io/badge/version-0.0.0-green.svg)
+![Version Badge](https://img.shields.io/badge/version-1.6.0-green.svg)
 
 You can wear some clothes over your armor (armor is not shown) <br>
 
