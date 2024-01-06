@@ -37,4 +37,4 @@ Mod page - <a href="https://valheim.thunderstore.io/package/Frogger/CosmeticSlot
 CosmeticSlots</a><br>
 GitHub - <a href="https://github.com/FroggerHH/CosmeticSlots">
 <img alt="GitHub Logo" src="https://github.githubassets.com/assets/pinned-octocat-093da3e6fa40.svg" width="16"/>
-CosmeticSlots</a><br>
+CosmeticSlots</a><br> 
